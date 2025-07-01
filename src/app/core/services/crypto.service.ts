@@ -14,7 +14,7 @@ export class CryptoService {
   constructor(private http: HttpClient) {}
 
   getTopCryptocurrencies(limit: number = 50): Observable<CryptoCurrency[]> {
-    // Using mock data since CoinMarketCap API requires API key and CORS setup
+    // mock data bcoz api website is not returning signup email
     return of(this.mockData).pipe(
       map(data => data.slice(0, limit)),
       catchError(error => {
