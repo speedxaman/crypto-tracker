@@ -1,18 +1,16 @@
 <div class="home-container">
-      <div class="hero-section">
-        <h1 class="hero-title">Cryptocurrency Market</h1>
-        <p class="hero-subtitle">Track the latest prices and market trends</p>
-      </div>
+  <div class="hero-section">
+    <h1 class="hero-title">Cryptocurrency Market</h1>
+    <p class="hero-subtitle">Track the latest prices and market trends</p>
+  </div>
 
-      <div class="crypto-grid">
-        <app-crypto-card
-          *ngFor="let crypto of cryptocurrencies; trackBy: trackByCryptoId"
-          [crypto]="crypto"
-          class="crypto-card-wrapper">
-        </app-crypto-card>
-      </div>
+  <div class="crypto-grid">
+    <app-crypto-card *ngFor="let crypto of cryptocurrencies; trackBy: trackByCryptoId" [crypto]="crypto"
+      class="crypto-card-wrapper">
+    </app-crypto-card>
+  </div>
 
-      <div *ngIf="cryptocurrencies.length === 0 && !isLoading" class="no-data">
-        <p>No cryptocurrency data available.</p>
-      </div>
-    </div>
+  <div *ngIf="cryptocurrencies.length === 0 && !isLoading" class="no-data">
+    <p>No cryptocurrency data available.</p>
+  </div>
+</div>
