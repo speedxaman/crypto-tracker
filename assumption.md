@@ -1,0 +1,1 @@
+# Used Mock Data Instead of Coinbase Api as i was not getting the verification code on my email
