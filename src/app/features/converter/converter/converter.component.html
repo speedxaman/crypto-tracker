@@ -1,0 +1,81 @@
+<div class="converter-container">
+  <div class="converter-header">
+    <h1 class="converter-title">Crypto Converter</h1>
+    <p class="converter-subtitle">Convert between different cryptocurrencies</p>
+  </div>
+
+  <div class="converter-card">
+    <form [formGroup]="converterForm" (ngSubmit)="onConvert()" class="converter-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">From</label>
+          <div class="input-group">
+            <input type="number" formControlName="amount" class="form-input amount-input" placeholder="Enter amount"
+              min="0" step="any">
+            <select formControlName="fromCurrency" class="form-select">
+              <option value="">Select currency</option>
+              <option *ngFor="let crypto of cryptocurrencies" [value]="crypto.symbol">
+                {{ crypto.symbol }} - {{ crypto.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="swap-button-container">
+          <button type="button" class="swap-button" (click)="swapCurrencies()">
+            <span class="swap-icon">⇄</span>
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">To</label>
+          <div class="input-group">
+            <input type="text" [value]="conversionResult | number:'1.2-8'" class="form-input result-input" readonly>
+            <select formControlName="toCurrency" class="form-select">
+              <option value="">Select currency</option>
+              <option *ngFor="let crypto of cryptocurrencies" [value]="crypto.symbol">
+                {{ crypto.symbol }} - {{ crypto.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="convert-button" [disabled]="!converterForm.valid || isConverting"
+        [class.loading]="isConverting">
+        <span *ngIf="!isConverting">Convert</span>
+        <span *ngIf="isConverting">Converting...</span>
+      </button>
+    </form>
+
+    <div *ngIf="conversionResult > 0" class="conversion-info">
+      <div class="conversion-rate">
+        <span class="rate-label">Exchange Rate:</span>
+        <span class="rate-value">
+          1 {{ converterForm.get('fromCurrency')?.value }} =
+          {{ (conversionResult / (converterForm.get('amount')?.value || 1)) | number:'1.2-8' }}
+          {{ converterForm.get('toCurrency')?.value }}
+        </span>
+      </div>
+      <div class="last-updated">
+        <span class="updated-label">Last updated: {{ lastUpdated | date:'short' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="popular-pairs">
+    <h3 class="popular-title">Popular Trading Pairs</h3>
+    <div class="pairs-grid">
+      <div *ngFor="let pair of popularPairs" class="pair-card" (click)="selectPair(pair)">
+        <div class="pair-info">
+          <span class="pair-from">{{ pair.from }}</span>
+          <span class="pair-arrow">→</span>
+          <span class="pair-to">{{ pair.to }}</span>
+        </div>
+        <div class="pair-rate">
+          1 {{ pair.from }} = {{ pair.rate | number:'1.2-6' }} {{ pair.to }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

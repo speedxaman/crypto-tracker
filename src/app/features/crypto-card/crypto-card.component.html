@@ -1,0 +1,40 @@
+<div class="crypto-card" [class.positive]="isPositive24h" [class.negative]="!isPositive24h">
+  <div class="card-header">
+    <div class="crypto-info">
+      <div class="crypto-logo">
+        <span class="crypto-symbol">{{ crypto.symbol }}</span>
+      </div>
+      <div class="crypto-details">
+        <h3 class="crypto-name">{{ crypto.name }}</h3>
+        <span class="crypto-rank">#{{ crypto.cmc_rank }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="price-section">
+      <div class="current-price">
+        {{ crypto.quote.USD.price | currency:'USD':'symbol':'1.2-6' }}
+      </div>
+    </div>
+
+    <div class="changes-section">
+      <div class="change-item">
+        <span class="change-label">24h</span>
+        <span class="change-value" [class.positive]="crypto.quote.USD.percent_change_24h > 0"
+          [class.negative]="crypto.quote.USD.percent_change_24h < 0">
+          {{ crypto.quote.USD.percent_change_24h > 0 ? '+' : '' }}{{ crypto.quote.USD.percent_change_24h |
+          number:'1.2-2' }}%
+        </span>
+      </div>
+      <div class="change-item">
+        <span class="change-label">7d</span>
+        <span class="change-value" [class.positive]="crypto.quote.USD.percent_change_7d > 0"
+          [class.negative]="crypto.quote.USD.percent_change_7d < 0">
+          {{ crypto.quote.USD.percent_change_7d > 0 ? '+' : '' }}{{ crypto.quote.USD.percent_change_7d | number:'1.2-2'
+          }}%
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
