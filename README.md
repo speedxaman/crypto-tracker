@@ -151,7 +151,7 @@ See [TODO.md](TODO.md) for planned features and improvements.
 
 ##  Assumptions
 
-See [ASSUMPTIONS.md](ASSUMPTIONS.md) for project assumptions and decisions.
+See [ASSUMPTIONS.md](assumption.md) for project assumptions and decisions.
 
 ## Contributing
 
